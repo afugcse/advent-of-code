@@ -126,6 +126,29 @@ func part1(parsedData games) int {
 	return gameIDsSum
 }
 
+// max val of each color in all sets of the game
 func part2(parsedData games) int {
-	return 0
+	totGamesPower := 0
+	for _, g := range parsedData {
+		redMax := 0
+		greenMax := 0
+		blueMax := 0
+		for _, s := range g.sets {
+			if redVal, ok := s["red"]; ok && redVal > redMax {
+				redMax = redVal
+			}
+
+			if greenVal, ok := s["green"]; ok && greenVal > greenMax {
+				greenMax = greenVal
+			}
+
+			if blueVal, ok := s["blue"]; ok && blueVal > blueMax {
+				blueMax = blueVal
+			}
+		}
+
+		totGamesPower += redMax * greenMax * blueMax
+	}
+
+	return totGamesPower
 }
